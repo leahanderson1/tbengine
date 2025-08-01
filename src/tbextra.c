@@ -127,7 +127,11 @@ void tbcolor(uint8_t fg, uint8_t bg, bool bold) {
 }
 
 void msleep(int ms) {
+#ifdef WIN32
+	Sleep(ms);
+#else
 	usleep(ms * 1000);
+#endif
 }
 void setecho(bool enable) {
 #ifdef WIN32

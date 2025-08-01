@@ -1,6 +1,11 @@
 #ifndef TBLIB_H
 #define TBLIB_H
+#ifdef __cplusplus
+#include <cstdint>
+using namespace std;
+#else
 #include <stdint.h>
+#endif
 #define RED 0
 #define GREEN 1
 #define YELLOW 2
@@ -18,13 +23,23 @@
 #define BRIGHTMAGENTA 14
 #define BRIGHTCYAN 15
 #define COLOR_RESET "\e[0m"
-
+#ifdef __cplusplus
+typedef struct {
+	char *string;
+	uint8_t color = WHITE;
+	uint8_t bg = BLACK;
+	bool bold = false;
+} Text;
+void tbout(Text text, bool vn = false, int ms = 0);
+void tbconfirm(int ms = 500);
+#else
 typedef struct {
 	char *string;
 	uint8_t color;
 	uint8_t bg;
 	bool bold;
 } Text;
-void tbout(Text text, bool vn, int microseconds);
+void tbout(Text text, bool vn, int ms);
 void tbconfirm(int ms);
+#endif
 #endif

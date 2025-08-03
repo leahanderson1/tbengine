@@ -31,6 +31,8 @@ typedef struct {
 	bool bold = false;
 } Text;
 void tbout(Text text, bool vn = false, int ms = 0);
+void mtbout(char *string, uint8_t color = WHITE, uint8_t bg = BLACK, bool bold = false, bool vn = false, int ms = 0);
+char *tbin(int maxchars);
 void tbconfirm(int ms = 500);
 #else
 typedef struct {
@@ -40,6 +42,8 @@ typedef struct {
 	bool bold;
 } Text;
 void tbout(Text text, bool vn, int ms);
+void mtbout(char *string, uint8_t color, uint8_t bg, bool bold, bool vn, int ms);
+char *tbin(int maxchars);
 void tbconfirm(int ms);
 #endif
 #endif

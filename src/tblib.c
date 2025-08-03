@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 #ifndef WIN32
 #include <pthread.h>
 #define PTHREADS
@@ -24,7 +25,14 @@ void tbout(Text text, bool vn, int ms) {
 	}
 	printf(COLOR_RESET);
 }
-
+void mtbout(char* string, uint8_t color, uint8_t bg, bool bold, bool vn, int ms) {
+	Text temp;
+	temp.string = (char *)string;
+	temp.color = color;
+	temp.bg = bg;
+	temp.bold = bold;
+	tbout(temp, vn, ms);
+}
 #ifndef WIN32
 void *blinkcursor(void *i) {
 	int a = *((int *) i);
@@ -60,4 +68,23 @@ void tbconfirm(int ms) {
 	printf("\r \r");
 	setecho(true);
 #endif
+}
+char* tbin(int maxchars) {
+	char buffer[maxchars];
+	char* result = NULL;
+	while (result == NULL) {
+		printf("\n>");
+    		result = fgets(buffer, sizeof(char) * maxchars, stdin);
+
+    		if (buffer[strlen(buffer) - 1] != '\n') {
+       			result = NULL;
+    		}
+	}
+	// ABSOLUTELY NO NEWLINES ALLOWED!!!!
+	buffer[strcspn(buffer, "\r\n")] = 0;
+	// i swear if someone files an issue calling this a memory leak i might explode
+	// also about the line below: even though char is usually 1 byte there could be systems where this isn't the case and thats why you shouldn't hardcode this kinda stuff use sizeof
+	char *output = calloc(maxchars, sizeof(char));
+	strcpy(output, buffer);
+	return output;
 }

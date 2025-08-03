@@ -10,7 +10,7 @@ BIN_PATH := bin
 OBJ_PATH := obj
 SRC_PATH := src
 DBG_PATH := debug
-TST_PATH := template
+TST_PATH := demo
 LIB_PATH := lib
 
 # compile macros

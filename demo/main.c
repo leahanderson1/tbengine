@@ -25,8 +25,9 @@ int main() {
 	tbout(meow, true, 50);
 	tbconfirm(500);
 	meow.string = "Oh, thank goodness, you're awake.";
+	tbout(meow, true, 50);
 	tbconfirm(500);
-	meow.string = "You've been laying here lifeless since a couple hours ago when I came over here....";
+	meow.string = "You've been laying here lifeless since a couple hours ago, when I came over here.";
 	tbout(meow, true, 50);
 	tbconfirm(500);
 	mtbout("Say, what's your name, miss?", BRIGHTCYAN, BLACK, false, true, 50);

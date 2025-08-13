@@ -24,6 +24,7 @@ using namespace std;
 #define BRIGHTMAGENTA 14
 #define BRIGHTCYAN 15
 #define COLOR_RESET "\e[0m"
+#define TBSELECT_INVALID 11
 #ifdef __cplusplus
 typedef struct Text {
 	char *string;
@@ -47,6 +48,6 @@ void tbout(Text text, bool vn, unsigned int ms);
 void mtbout(char *string, uint8_t color, uint8_t bg, bool bold, bool vn, unsigned int ms);
 char *tbin(unsigned int maxchars);
 void tbconfirm(unsigned int ms);
-void tbselect(uint8_t menu);
+uint8_t tbselect(uint8_t menu);
 #endif
 #endif

@@ -1,5 +1,5 @@
 # tool macros
-CC ?= gcc 
+CC ?= gcc
 AR ?= ar
 CFLAGS := -Wall -Wextra -Werror -I./include
 DBGFLAGS := -g
@@ -52,7 +52,7 @@ $(DBG_PATH)/%.o: $(SRC_PATH)/%.c*
 $(BIN_PATH)/%.o: $(TST_PATH)/%.c*
 	$(CC) $(COBJFLAGS) -o $@ $<
 $(TARGET_DEBUG): $(OBJ_DEBUG)
-	$(CC) $(CFLAGS) $(DBGFLAGS) $(OBJ_DEBUG) -o $@
+	$(AR) rcs $@ $^
 $(TARGET_TEST): $(OBJ_TEST)
 	$(CC) $(CFLAGS) $(OBJ_TEST) $(TESTFLAGS) -o $@
 # phony rules
@@ -75,4 +75,3 @@ clean:
 distclean:
 	@echo CLEAN $(DISTCLEAN_LIST)
 	@rm -f $(DISTCLEAN_LIST)
-

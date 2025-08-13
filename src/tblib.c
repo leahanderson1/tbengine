@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <ctype.h>
 #ifndef WIN32
 #include <pthread.h>
 #define PTHREADS
@@ -80,7 +81,7 @@ char* tbin(unsigned int maxchars) {
        			result = NULL;
     		}
 	}
-	// ABSOLUTELY NO NEWLINES ALLOWED!!!!
+	// ABSOLUTELY NO NEWLINES ALLOWE<ctype.hD!!!!
 	buffer[strcspn(buffer, "\r\n")] = 0;
 	// i swear if someone files an issue calling this a memory leak i might explode
 	// also about the line below: even though char is usually 1 byte there could be systems where this isn't the case and thats why you shouldn't hardcode this kinda stuff use sizeof
@@ -89,6 +90,33 @@ char* tbin(unsigned int maxchars) {
 	return output;
 }
 
-void tbselect(uint8_t menu) {
-    int options[menu];
+uint8_t tbselect(uint8_t menu) {
+    if (menu > 10 || menu <= 0) {
+        // invalid amount of options
+        return 11;
+    }
+    uint8_t options[menu];
+    // create an array of valid inputs
+    for (int i = 0; i < menu; i++) {
+        options[i] = i;
+    }
+    // get the input of the user
+    uint8_t choice;
+    bool valid = false;
+    while (!valid) {
+        printf("\r>");
+        // atoi only accepts strings
+        char in[1] = {getchar()};
+        if (!isdigit(in[0])) {
+            continue;
+        }
+        choice = atoi(in);
+        for (int i = 0; i < menu || valid; i++)  {
+                if (options[i] == choice) {
+                    valid = true;
+                    break;
+                }
+        }
+    }
+    return choice;
 }

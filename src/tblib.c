@@ -9,7 +9,7 @@
 #include "tbextra.h"
 #include "tblib.h"
 
-void tbout(Text text, bool vn, int ms) {
+void tbout(Text text, bool vn, unsigned int ms) {
 	tbcolor(text.color, text.bg, text.bold);
 	if (vn) {
 		int length = strlen(text.string);
@@ -25,7 +25,7 @@ void tbout(Text text, bool vn, int ms) {
 	}
 	printf(COLOR_RESET);
 }
-void mtbout(char* string, uint8_t color, uint8_t bg, bool bold, bool vn, int ms) {
+void mtbout(char* string, uint8_t color, uint8_t bg, bool bold, bool vn, unsigned int ms) {
 	Text temp;
 	temp.string = (char *)string;
 	temp.color = color;
@@ -45,12 +45,12 @@ void *blinkcursor(void *i) {
 		printf("\r ");
 		fflush(stdout);
 		msleep(a);
-		printf("\r>");	
+		printf("\r>");
 	}
 	return NULL;
 }
 #endif
-void tbconfirm(int ms) {
+void tbconfirm(unsigned int ms) {
 #ifdef PTHREADS
 	pthread_t id;
 	int *arg = (int *) malloc(sizeof(*arg));
@@ -69,7 +69,7 @@ void tbconfirm(int ms) {
 	setecho(true);
 #endif
 }
-char* tbin(int maxchars) {
+char* tbin(unsigned int maxchars) {
 	char buffer[maxchars];
 	char* result = NULL;
 	while (result == NULL) {
@@ -87,4 +87,8 @@ char* tbin(int maxchars) {
 	char *output = calloc(maxchars, sizeof(char));
 	strcpy(output, buffer);
 	return output;
+}
+
+void tbselect(uint8_t menu) {
+    int options[menu];
 }

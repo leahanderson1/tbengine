@@ -5,6 +5,7 @@
 using namespace std;
 #else
 #include <stdint.h>
+#include <stdbool.h>
 #endif
 #define RED 0
 #define GREEN 1
@@ -24,16 +25,17 @@ using namespace std;
 #define BRIGHTCYAN 15
 #define COLOR_RESET "\e[0m"
 #ifdef __cplusplus
-typedef struct {
+typedef struct Text {
 	char *string;
 	uint8_t color = WHITE;
 	uint8_t bg = BLACK;
 	bool bold = false;
 } Text;
-void tbout(Text text, bool vn = false, int ms = 0);
-void mtbout(char *string, uint8_t color = WHITE, uint8_t bg = BLACK, bool bold = false, bool vn = false, int ms = 0);
-char *tbin(int maxchars);
-void tbconfirm(int ms = 500);
+void tbout(Text text, bool vn = false, unsigned int ms = 0);
+void mtbout(char *string, uint8_t color = WHITE, uint8_t bg = BLACK, bool bold = false, bool vn = false, unsigned int ms = 0);
+char *tbin(unsigned int maxchars);
+void tbconfirm(unsigned int ms = 500);\
+void tbselect(unsigned int menu);
 #else
 typedef struct {
 	char *string;
@@ -41,9 +43,10 @@ typedef struct {
 	uint8_t bg;
 	bool bold;
 } Text;
-void tbout(Text text, bool vn, int ms);
-void mtbout(char *string, uint8_t color, uint8_t bg, bool bold, bool vn, int ms);
-char *tbin(int maxchars);
-void tbconfirm(int ms);
+void tbout(Text text, bool vn, unsigned int ms);
+void mtbout(char *string, uint8_t color, uint8_t bg, bool bold, bool vn, unsigned int ms);
+char *tbin(unsigned int maxchars);
+void tbconfirm(unsigned int ms);
+void tbselect(uint8_t menu);
 #endif
 #endif

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 #ifdef WIN32
 #include <windows.h>
 #else
@@ -126,7 +127,7 @@ void tbcolor(uint8_t fg, uint8_t bg, bool bold) {
 	printf("m");
 }
 
-void msleep(int ms) {
+void msleep(unsigned int ms) {
 #ifdef WIN32
 	Sleep(ms);
 #else
@@ -135,7 +136,7 @@ void msleep(int ms) {
 }
 void setecho(bool enable) {
 #ifdef WIN32
-	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
+	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
 	DWORD mode;
 	GetConsoleMode(hStdin, &mode);
 

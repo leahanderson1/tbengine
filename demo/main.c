@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <tblib.h>
 #include <tbextra.h>
@@ -30,14 +29,14 @@ int main() {
 	meow.string = "You've been laying here lifeless since a couple hours ago, when I came over here.";
 	tbout(meow, true, 50);
 	tbconfirm(500);
-	mtbout("Say, what's your name, miss?", BRIGHTCYAN, BLACK, false, true, 50);
+	mtbout("Say, what's your name?", BRIGHTCYAN, BLACK, false, true, 50);
 	char *name = tbin(20);
+
 	if (name != NULL) {
 		char buffer[100];
 		strcat(buffer, name);
 		strcat(buffer, "... That's an interesting name! Nice to meet you, ");
 		strcat(buffer, name);
-		free(name);
 		strcat(buffer, "!");
 		mtbout(buffer, BRIGHTCYAN, BLACK, false, true, 50);
 		tbconfirm(500);

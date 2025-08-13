@@ -31,12 +31,27 @@ int main() {
 	tbconfirm(500);
 	mtbout("Say, what's your name?", BRIGHTCYAN, BLACK, false, true, 50);
 	char *name = tbin(20);
-
+	mtbout("Select Gender:\n0: Male\n1: Female\n2: Neutral", WHITE, BLACK, false, true, 50);
+	int gender = tbselect(3);
 	if (name != NULL) {
-		char buffer[100];
+		char buffer[150];
 		strcat(buffer, name);
 		strcat(buffer, "... That's an interesting name! Nice to meet you, ");
-		strcat(buffer, name);
+		switch (gender) {
+		    default:
+				strcat(buffer, name);
+				break;
+			case 0:
+			    strcat(buffer, "sir");
+				break;
+			case 1:
+			    strcat(buffer, "miss");
+				break;
+			case 2:
+                strcat(buffer, name);
+                break;
+		}
+
 		strcat(buffer, "!");
 		mtbout(buffer, BRIGHTCYAN, BLACK, false, true, 50);
 		tbconfirm(500);

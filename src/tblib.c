@@ -16,10 +16,8 @@ void tbout(Text text, bool vn, unsigned int ms) {
 		int length = strlen(text.string);
 		for (int i = 0; i < length; i++) {
         		putchar(text.string[i]);
-#ifndef WIN32
-			fflush(stdout);
-#endif
-			msleep(ms);
+                fflush(stdout);
+                msleep(ms);
     		}
 	} else {
 		printf(text.string);
@@ -60,8 +58,7 @@ void tbconfirm(unsigned int ms) {
 	getchar();
 	pthread_cancel(id);
 	printf("\r \r");
-        setecho(true);
-
+    setecho(true);
 #else
 	printf("\n>");
 	setecho(false);
@@ -75,13 +72,13 @@ char* tbin(unsigned int maxchars) {
 	char* result = NULL;
 	while (result == NULL) {
 		printf("\n>");
-    		result = fgets(buffer, sizeof(char) * maxchars, stdin);
+        result = fgets(buffer, sizeof(char) * maxchars, stdin);
 
-    		if (buffer[strlen(buffer) - 1] != '\n') {
-       			result = NULL;
-    		}
+        if (buffer[strlen(buffer) - 1] != '\n') {
+           	result = NULL;
+        }
 	}
-	// ABSOLUTELY NO NEWLINES ALLOWE<ctype.hD!!!!
+	// ABSOLUTELY NO NEWLINES ALLOWED!!!!
 	buffer[strcspn(buffer, "\r\n")] = 0;
 	// i swear if someone files an issue calling this a memory leak i might explode
 	// also about the line below: even though char is usually 1 byte there could be systems where this isn't the case and thats why you shouldn't hardcode this kinda stuff use sizeof
@@ -91,32 +88,30 @@ char* tbin(unsigned int maxchars) {
 }
 
 uint8_t tbselect(uint8_t menu) {
-    if (menu > 10 || menu <= 0) {
+    if (menu <= 0) {
         // invalid amount of options
         return 11;
     }
     uint8_t options[menu];
     // create an array of valid inputs
     for (int i = 0; i < menu; i++) {
-        options[i] = i;
+       options[i] = i;
     }
     // get the input of the user
     uint8_t choice;
     bool valid = false;
     while (!valid) {
-        printf("\r>");
-        // atoi only accepts strings
-        char in[1] = {getchar()};
-        if (!isdigit(in[0])) {
-            continue;
+        char *input = tbin(4);
+        if (isdigit(input[0])) {
+           choice = atoi(input);
+           for (int i = 0; i < menu; i++) {
+               if (options[i] == choice) {
+                   valid = true;
+                   break;
+               }
+           }
         }
-        choice = atoi(in);
-        for (int i = 0; i < menu || valid; i++)  {
-                if (options[i] == choice) {
-                    valid = true;
-                    break;
-                }
-        }
+        free(input);
     }
     return choice;
 }

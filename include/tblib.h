@@ -35,8 +35,7 @@ typedef struct Text {
 void tbout(Text text, bool vn = false, unsigned int ms = 0);
 void mtbout(char *string, uint8_t color = WHITE, uint8_t bg = BLACK, bool bold = false, bool vn = false, unsigned int ms = 0);
 char *tbin(unsigned int maxchars);
-void tbconfirm(unsigned int ms = 500);\
-void tbselect(unsigned int menu);
+void tbconfirm(unsigned int ms = 500);
 #else
 typedef struct {
 	char *string;
@@ -48,6 +47,6 @@ void tbout(Text text, bool vn, unsigned int ms);
 void mtbout(char *string, uint8_t color, uint8_t bg, bool bold, bool vn, unsigned int ms);
 char *tbin(unsigned int maxchars);
 void tbconfirm(unsigned int ms);
-uint8_t tbselect(uint8_t menu);
 #endif
+uint8_t tbselect(uint8_t menu);
 #endif

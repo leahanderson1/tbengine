@@ -53,7 +53,7 @@ $(BIN_PATH)/%.o: $(TST_PATH)/%.c*
 	$(CC) $(COBJFLAGS) -o $@ $<
 $(TARGET_DEBUG): $(OBJ_DEBUG)
 	$(AR) rcs $@ $^
-$(TARGET_TEST): $(OBJ_TEST)
+$(TARGET_TEST):  $(TARGET) $(OBJ_TEST)
 	$(CC) $(CFLAGS) $(OBJ_TEST) $(TESTFLAGS) -o $@
 # phony rules
 .PHONY: makedir

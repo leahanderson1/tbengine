@@ -20,7 +20,7 @@ void tbout(Text text, bool vn, unsigned int ms) {
                 msleep(ms);
     		}
 	} else {
-		printf(text.string);
+		printf("%s", text.string);
 	}
 	printf(COLOR_RESET);
 }

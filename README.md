@@ -8,6 +8,11 @@ For Unix-like platforms, you can just run `make`. This generates a static librar
 
 On Windows, build support is currently not there, however Windows support is currently coded in. Since I am not experienced with building C code on Windows, feel free to make a PR to add Windows building support to the makefile.
 
+## To-do list
+
+- [ ] Add full documentation
+- [ ] Add SDL3 version so you don't need a terminal to use the library
+
 ## Getting Started
 
 You can check out the example in the `template` folder to see what to do.

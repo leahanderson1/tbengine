@@ -16,7 +16,9 @@ void tbout(Text text, bool vn, unsigned int ms) {
 		int length = strlen(text.string);
 		for (int i = 0; i < length; i++) {
         		putchar(text.string[i]);
+        #ifndef WIN32
                 fflush(stdout);
+        #endif
                 msleep(ms);
     		}
 	} else {
